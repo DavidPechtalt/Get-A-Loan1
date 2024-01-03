@@ -7,6 +7,7 @@ import RejectMessage from "./RejectMessage";
 import SelectedProvider from "../../../contexts/SelectedProvider";
 import useFetch from "../../../hooks/useFetch";
 import RequestsTable from "./RequestsTable";
+import OnClickMessage from "./OnClickMessage";
 export default function RequestsList() {
   const { data, isPending, error } = useFetch("admin/requests");
 
@@ -18,6 +19,7 @@ export default function RequestsList() {
           {error && <h1>Error</h1>} {data && <RequestsTable dataArr={data} />}
           <ConfirmMessage />
           <RejectMessage />
+          <OnClickMessage />
         </SelectedProvider>
       </OpenProvider>
     </Container>
