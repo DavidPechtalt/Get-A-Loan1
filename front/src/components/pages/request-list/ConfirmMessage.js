@@ -28,11 +28,11 @@ export default function ConfirmMessage() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Are You Sure You Want To Confirm The Loan?"}
+          {"Loan "}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Notice that this action is dangarous to you
+          
           </DialogContentText>
         </DialogContent>
         <DialogActions>

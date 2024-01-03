@@ -1,9 +1,7 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
 import "../../../styles/requestsTable.css";
-import { useConfirmOpen, useOnClickOpen } from "../../../contexts/OpenConfirmProvider";
 export default function RequestsTable({ dataArr }) {
-  const [open, setItOpen] = useOnClickOpen();
   const data = useMemo(() => dataArr, [dataArr]);
   const columns = useMemo(
     () => [
@@ -78,7 +76,7 @@ export default function RequestsTable({ dataArr }) {
           return (
             <tr
               {...row.getRowProps()}
-              onClick={() => setItOpen(true)}
+              onClick={() => console.log(row.original.loanId)}
             >
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;

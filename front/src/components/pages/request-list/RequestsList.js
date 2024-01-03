@@ -1,13 +1,10 @@
 import { Container, Box, CircularProgress } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import RequestCard from "./RequestCard";
-import ConfirmMessage from "./ConfirmMessage";
-import OpenProvider, { useConfirmOpen } from "../../../contexts/OpenConfirmProvider";
-import RejectMessage from "./RejectMessage";
+import OpenProvider from "../../../contexts/OpenConfirmProvider";
 import SelectedProvider from "../../../contexts/SelectedProvider";
+import ConfirmMessage from "./ConfirmMessage";
+import RejectMessage from "./Dialog";
 import useFetch from "../../../hooks/useFetch";
 import RequestsTable from "./RequestsTable";
-import OnClickMessage from "./OnClickMessage";
 export default function RequestsList() {
   const { data, isPending, error } = useFetch("admin/requests");
 
@@ -19,7 +16,6 @@ export default function RequestsList() {
           {error && <h1>Error</h1>} {data && <RequestsTable dataArr={data} />}
           <ConfirmMessage />
           <RejectMessage />
-          <OnClickMessage />
         </SelectedProvider>
       </OpenProvider>
     </Container>

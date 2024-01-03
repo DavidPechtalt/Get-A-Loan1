@@ -2,6 +2,7 @@ const express = require("express");
 const { newLoan } = require("../../../DB/functions/newLoan");
 const { stringAssembly } = require("../../../DB/functions/stringAssembly");
 const { getAll } = require("../../../DB/functions/getAll");
+const {rejecloan} = require('../../../DB/functions/rejectloan')
 const { pool } = require("../../../DB/createDB/pool");
 const {getAllPending} = require('../../../DB/functions/getAllPendingRequests')
 const router = express.Router();
@@ -50,4 +51,13 @@ router.get("/requests", async (req, res, next) => {
       next()
     }
 });
+router.put('/loan/:loan_id/reject',async(req, res, next) =>{
+  try {
+    const loanId = req.params.loan_id;
+    const res = await rejecloan()
+    res.send(res[0]) ;
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
 module.exports = router;
