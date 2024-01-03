@@ -3,9 +3,10 @@ function stringAssembly(arrQueries, objValues){
     let string = ` `
     let and = ` AND `
     let firstQueryDone = 0
+    console.log(arrQueries, objValues);
     const arrValues = Object.keys(objValues);
    for(let i = 0; i < arrQueries.length; i++){
-        if(objValues[arrValues[i]] == ""){
+        if(objValues[arrValues[i]] == '' || objValues[arrValues[i]] == undefined){
             console.log("Breaking " , i);
             continue;
         }
@@ -21,7 +22,6 @@ function stringAssembly(arrQueries, objValues){
    return string
 }
 
-// const sql =stringAssembly([' hello = ', ' momey = ',' ronen = ', 'baby = '], {hello: '5', money: '90', ronen: '', baby: '99'})
-// console.log(sql);
+
 
 module.exports = {stringAssembly};

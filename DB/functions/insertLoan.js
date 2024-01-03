@@ -1,17 +1,19 @@
-const insertLoan = async (connection, values) => {
+const {pool} = require('../createDB/pool')
+
+const insertLoan = async ( values) => {
   const sql = `INSERT INTO loans
     (
-    bank_acc,
-    sum,
-    num_of_payments,
-    given_at,
-    fixed_rate,
+    status,
+    amount,
+    numOfPayments,
+    givenAt,
+    fixedRate,
     prime,
-    plus_rate,
-    current_rate,
-    current_balance,
-    user_id,
-    paid_num
+    plusRate,
+    currentRate,
+    currentBalance,
+    userId,
+    paidNum
     ) 
     VALUES(
        
@@ -28,6 +30,6 @@ const insertLoan = async (connection, values) => {
         ? )`;
        
    
-  return await connection.query(sql, values);
+  return await pool.query(sql, values);
 };
 module.exports = { insertLoan };
