@@ -9,6 +9,7 @@ import Loan from "./components/pages/admin/Loan";
 import LoansList from "./components/pages/admin/LoansList";
 import LoansPage from "./components/pages/admin/LoansPage";
 import NewLoanForm from "./components/pages/user/NewLoanForm";
+import RequestsList from "./components/pages/request-list/RequestsList";
 
 const arr = [
   { name: "david", date: "19/10/90", amount: 6000, loanId: "674836" },
@@ -18,15 +19,16 @@ const arr = [
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div style={
-    {height: '100vh'}
-  } >
+  // <div style={
+  //   {height: '100vh'}
+  // } >
  
     
    
-    <Container sx={{height: '100vh'}}>
-      <App />
+  //   <Container sx={{height: '100vh'}}>
+  //     <App />
     
-    </Container>
-  </div>
+  //   </Container>
+  // </div>
+  <RequestsList/>
 );

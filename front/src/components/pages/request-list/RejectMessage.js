@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {  useRejectOpen } from '../contexts/OpenConfirmProvider';
+import {  useRejectOpen } from '../../../contexts/OpenConfirmProvider';
 
 export default function RejectMessage() {
   const [open, setOpen] = useRejectOpen()

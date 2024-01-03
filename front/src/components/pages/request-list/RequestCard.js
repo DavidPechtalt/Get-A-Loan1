@@ -7,8 +7,8 @@ import {
   Button,
 } from "@mui/material";
 import React from "react";
-import { useConfirmOpen, useRejectOpen } from "../contexts/OpenConfirmProvider";
-import { useSelected } from "../contexts/SelectedProvider";
+import { useConfirmOpen, useRejectOpen } from "../../../contexts/OpenConfirmProvider";
+import { useSelected } from "../../../contexts/SelectedProvider";
 
 export default function RequestCard({ loanData }) {
   const [openConfirm, setOpenConfirm] = useConfirmOpen();
