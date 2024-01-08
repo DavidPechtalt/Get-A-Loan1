@@ -8,7 +8,7 @@
 function calculateMonthlyPayment(su, numPayments, interestRate) {
   // Convert annual interest rate to monthly interest rate
   const monthlyInterestRate = interestRate / 12;
-
+  console.log(su, numPayments, interestRate);
   // Calculate the monthly payment using the Spitzer formula
   const numerator =
     su * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numPayments);

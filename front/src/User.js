@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
-import UserTable from "./UserTable";
+// import UserTable from "./UserTable";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import UserName from "./UserNameCon";
@@ -19,7 +19,7 @@ export default function User() {
     
       <Container>
         <Box>
-          <Paper elevation={3} sx={{ height: "22vh", marginY: "14vh" }}>
+          <Paper elevation={3} sx={{ height: "12vh", marginY: "3vh" }}>
             {" "}
             <Typography>
               <h1

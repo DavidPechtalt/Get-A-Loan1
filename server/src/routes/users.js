@@ -37,6 +37,7 @@ router.get('/loans', async(req, res)=>{
 })
 router.get('/calculate_payments', async(req, res)=>{
     const rate = req.query.rate;
+    console.log(rate);
     const numOfPayments = req.query.num;
     const amount = req.query.amount;
     const monthlyPayment = calculateMonthlyPayment(amount, numOfPayments, rate);

@@ -11,24 +11,10 @@ import LoansPage from "./components/pages/admin/LoansPage";
 import NewLoanForm from "./components/pages/user/NewLoanForm";
 import RequestsList from "./components/pages/request-list/RequestsList";
 
-const arr = [
-  { name: "david", date: "19/10/90", amount: 6000, loanId: "674836" },
-  { name: "david", date: "19/10/90", amount: 6000, loanId: "674837" },
-  { name: "david", date: "19/10/90", amount: 6000, loanId: "674838" },
-];
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <div style={
-  //   {height: '100vh'}
-  // } >
- 
-    
-   
-  //   <Container sx={{height: '100vh'}}>
-  //     <App />
-    
-  //   </Container>
-  // </div>
-  <RequestsList/>
+
+  <App/>
 );

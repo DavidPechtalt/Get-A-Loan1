@@ -105,7 +105,7 @@ const Login = () => {
             )}
           </form>
           <small>
-            Need an account? <Link to="/">Register here</Link>
+            Need an account? <Link to="/sign_up">Register here</Link>
           </small>
         </Container>
       </React.Fragment>
