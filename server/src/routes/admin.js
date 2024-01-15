@@ -3,6 +3,7 @@ const { newLoan } = require("../../../DB/functions/newLoan");
 const { stringAssembly } = require("../../../DB/functions/stringAssembly");
 const { getAll } = require("../../../DB/functions/getAll");
 const { pool } = require("../../../DB/createDB/pool");
+const {getAllPending} = require('../../../DB/functions/getAllPendingRequests')
 const router = express.Router();
 router.use(express.json());
 router.post("/loans/new_loan", (req, res) => {
@@ -20,17 +21,33 @@ router.post("/loans/new_loan", (req, res) => {
     });
 });
 
-router.post('/loans', async(req, res) =>{
+router.post("/loans", async (req, res) => {
   console.log("got in");
-  const queriesArr = req.body.queriesArr;
-  const searchObj = req.body.searchObj;
-  console.log(req.body);
-  const string =  stringAssembly(queriesArr, searchObj)
-  const resp = await getAll('loans', string)
+  const queriesArr = [
+    "amount = ",
+    "currentRate = ",
+    "fixedRate = ",
+    "plusRate = ",
+    "givenAt = ",
+    "givenAt > ",
+    "givenAt < ",
+    "userName = ",
+  ];
+const searchObj = req.body
+  const string = stringAssembly(queriesArr, searchObj);
+  const resp = await getAll("loans", string);
   console.log("resp", resp);
-  res.send(resp)
-})
-router.get("/account", (req, res) => {
-  //getCashFlow();
+  res.send(resp);
+});
+router.get("/requests", async (req, res, next) => {
+  console.log('got request!');
+    try {
+    const pending = await  getAllPending()
+    const response = pending[0]
+    res.send(response)
+    } catch (error) {
+      console.error(error);
+      next()
+    }
 });
 module.exports = router;
