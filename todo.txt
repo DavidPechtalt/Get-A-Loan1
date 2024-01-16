@@ -10,7 +10,7 @@
 
 6> Run the front and the back synchronausly.
 
-7> log-in and register models.
+7> Log-in and register models with authentication.
 
 
 
