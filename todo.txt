@@ -1,14 +1,18 @@
+6> Run the front and the back synchronausly.
+
+
 1> Prime and fixed interest in select box with constant values.
 
 2> Client's loans list with basic details in client's section.
 
-3> Proper error handeling and success message in new loan request of client's section.
+5> List of awaiting loans with accept / reject option.
+
+3> Proper success message and error handeling in new loan request of client's section.
 
 4> Search for a loan by parameters and displaying with proper error handling in manager section.
 
-5> List of awaiting loans with accept / reject option.
 
-6> Run the front and the back synchronausly.
+
 
 7> Log-in and register models with authentication.
 
