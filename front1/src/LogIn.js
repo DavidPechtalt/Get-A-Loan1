@@ -65,16 +65,16 @@ Axios.defaults.withCredentials = true;
       alert("error");
     }
 
-    // setTimeout(() => {
-    //   setProccessing(false);
-    //   if(name === 'd'&& password === '0'&& id === '0'){
-    //     setUserName("admin")
-    //     navigate('/admin')
-    //     return
-    //   }
-    //   setUserName(name);
-    //   navigate(`/users/${name}`);
-    // }, 500);
+    useEffect(() => {
+      async function checkSession(){
+        try {
+          instance.get('login')
+        } catch (error) {
+          
+        }
+      }
+    }, [])
+    
   };
  
  

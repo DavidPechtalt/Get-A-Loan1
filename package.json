@@ -1,0 +1,14 @@
+{
+  "name": "get-a-loan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:front": "cd front1 && npm start",
+    "start:back": "cd server && npm run dev",
+    "start": "concurrently \"npm run start:front\" \"npm run start:back\""
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import LogIn from "./LogIn";
 import User from "./User";
@@ -15,7 +15,6 @@ import NewLoanForm from "./components/pages/user/NewLoanForm";
 import { useState, useEffect } from "react";
 import instance from "./api/api";
 
-
 import UserName from "./UserNameCon";
 import CashFlow from "./CashFlow";
 import { Error } from "@mui/icons-material";
@@ -24,11 +23,12 @@ import LoanFullDetails from "./components/pages/admin/LoanFullDetails";
 import ConditionalRoute from "./components/ConditionalRouting";
 import SignUp from "./SignUp";
 
-
 function App() {
+
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const pathname = window.location.pathname
- 
+  
+
   useEffect(() => {
     async function checkSession() {
       try {
@@ -47,14 +47,31 @@ function App() {
 
   return (
     <Router>
-      <ConditionalRoute condition={isLoggedIn } redirectTo={"/admin"}>
+      
+      <ConditionalRoute condition={!isLoggedIn} redirectTo={"/admin"}>
         <Routes>
-          <Route path="log_in" element={<LogIn isLoggedIn = {isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
-          <Route path="sign_up" element={<SignUp />} />
+
+            <Route path="sign_up" element={<SignUp />} />
+          <Route
+            path="log_in"
+            element={
+              <LogIn isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          />
+          <Route
+            index
+            element={
+              <LogIn isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          />
+        
         </Routes>
       </ConditionalRoute>
-        
-      <ConditionalRoute  condition={!isLoggedIn } redirectTo={"/log_in"}>
+
+
+      <ConditionalRoute condition={isLoggedIn}>
+            
+
         <ButtonAppBar />
 
         <Routes>
@@ -68,12 +85,11 @@ function App() {
               )
             }
           >
-            {/* <Route index element={<UserLoans />} /> */}
             <Route path="new_loan" element={<NewLoanForm />} />
           </Route>
           <Route path="admin" element={<Admin />}>
-            <Route path="loans_list" element={<LoansPage />} />
-            <Route path="loan/:loan_id" element={<LoanFullDetails />} />
+            {/* <Route path="loans_list" element={<LoansPage />} />
+            <Route path="loan/:loan_id" element={<LoanFullDetails />} /> */}
             <Route path="new_loan" element={<NewLoan />} />
             <Route path="cash_flow" element={<CashFlow />} />
           </Route>
