@@ -10,5 +10,11 @@
     "start": "concurrently \"npm run start:front\" \"npm run start:back\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "concurrently": "^8.2.2",
+    "googleapis": "^105.0.0",
+    "react": "^18.2.0"
+  }
 }
