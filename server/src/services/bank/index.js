@@ -20,9 +20,10 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
+const { error } = require('console');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -104,6 +105,112 @@ async function listFiles(authClient) {
     console.log(`${file.name} (${file.id})`);
   });
 }
+/**
+ * @param {OAuth2Client} authClient An authorized OAuth2 client.
+ */
 
-authorize().then(listFiles).catch(console.error);
+async function createAccountFile( account, folderId) {
+ const auth = await authorize()
+  const drive = google.drive({ version: 'v3', auth: auth });
+
+  try {
+    const res = await drive.files.create({
+      requestBody: {
+        name: `${account.account_number}.json`,
+        mimeType: 'application/json',
+        parents:  [folderId] 
+      },
+      media: {
+        mimeType: 'application/json',
+        body: JSON.stringify(account),
+      },
+    });
+
+    console.log('New account file created:', res.data);
+  } catch (error) {
+    console.error('Error creating account file:', error);
+  }
+}
+// Search for a file by account number and return its file ID
+async function findFileIdByAccountNumber( accountNumber) {
+  const auth = await authorize();
+  const drive = google.drive({ version: 'v3', auth: auth });
+
+  try {
+    const res = await drive.files.list({
+      q: `name='${accountNumber}.json'`,
+      fields: 'files(id)',
+    });
+
+    const files = res.data.files;
+    if (files.length > 0) {
+      return files[0].id; // Return the first matching file's ID
+    } else {
+      console.log(`File not found for account number: ${accountNumber}`);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error searching for file:', error.message);
+    return null;
+  }
+}
+
+// Example: Update an account file by account number
+async function updateAccount( accountNumber, updatedData) {
+  const auth = await authorize()
+  const fileId = await findFileIdByAccountNumber(auth, accountNumber);
+
+  if (fileId) {
+    const drive = google.drive({ version: 'v3', auth: auth });
+
+    try {
+      const media = {
+        mimeType: 'application/json',
+        body: JSON.stringify(updatedData),
+      };
+
+      const res = await drive.files.update({
+        fileId: fileId,
+        media: media,
+      });
+
+      console.log('File updated successfully:', res.data);
+    } catch (error) {
+      console.error('Error updating file:', error.message);
+    }
+  }
+}
+
+// Example: Delete an account file by account number
+async function deleteAccount( accountNumber) {
+  const auth = await authorize();
+  const fileId = await findFileIdByAccountNumber(auth, accountNumber);
+
+  if (fileId) {
+    const drive = google.drive({ version: 'v3', auth: auth });
+
+    try {
+      await drive.files.delete({
+        fileId: fileId,
+      });
+
+      console.log('File deleted successfully.');
+    } catch (error) {
+      console.error('Error deleting file:', error.message);
+    }
+  }
+}
+
+const account = {account_number:" 0544958021", balance: '9899' }
+ createAccountFile( account, `17R3TReYVLCm_WkjwIpz8ybQsC66aNhgk`);
+// authorize().then(listFiles).catch(error => console.log(error))
+
+module.exports = {
+  authorize,
+  findFileIdByAccountNumber,
+  
+  updateAccount,
+  deleteAccount,
+};
+
 // [END drive_quickstart]
