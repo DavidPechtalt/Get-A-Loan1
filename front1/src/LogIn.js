@@ -20,8 +20,6 @@ const Login = ({ setIsLoggedIn}) => {
   const [lastName, setLastName] = useState("");
   const [lastNameError, setLastNameError] = useState(false);
   const [password, setPassword] = useState("");
-  const [id, setId] = useState("");
-  const [idError, setIdError] = useState(false);
   const navigate = useNavigate()
   const [passwordError, setPasswordError] = useState(false);
   // const [userName, setUserName] = useContext(UserName);
@@ -52,7 +50,7 @@ Axios.defaults.withCredentials = true;
         firstName: firstName,
         lastName: lastName,
         password: password,
-        id: id,
+        
       });
       if (ans.data === "You are not in the data") {
         alert("you are not in our list");
@@ -65,15 +63,16 @@ Axios.defaults.withCredentials = true;
       alert("error");
     }
 
-    useEffect(() => {
-      async function checkSession(){
-        try {
-          instance.get('login')
-        } catch (error) {
+    // useEffect(() => {
+    //   async function checkSession(){
+    //     try {
+    //       instance.get('login')
+    //     } catch (error) {
           
-        }
-      }
-    }, [])
+    //     }
+    //   }
+    //   checkSession()
+    // }, [])
     
   };
  
@@ -118,17 +117,7 @@ Axios.defaults.withCredentials = true;
               fullWidth
               sx={{ mb: 3 }}
             />
-            <TextField
-              label="id"
-              onChange={(e) => setId(e.target.value)}
-              required
-              variant="outlined"
-              type="password"
-              value={id}
-              error={idError}
-              fullWidth
-              sx={{ mb: 3 }}
-            />
+           
             {!proccessing ? (
               <Button variant="outlined" color="secondary" type="submit">
                 Login
